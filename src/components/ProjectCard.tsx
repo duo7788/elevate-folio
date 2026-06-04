@@ -281,7 +281,7 @@ export default function ProjectCard({
                   placeholder="Story content..."
                 />
               ) : (
-                <div className="markdown-body prose dark:prose-invert max-w-none prose-p:leading-relaxed prose-img:rounded-2xl prose-img:w-full prose-img:my-8 prose-headings:font-display">
+                <div className="markdown-body prose prose-sm dark:prose-invert max-w-none leading-6 prose-p:leading-6 prose-li:leading-6 prose-img:rounded-2xl prose-img:w-full prose-img:my-7 prose-headings:font-display">
                   <ReactMarkdown>{project.story || ""}</ReactMarkdown>
                 </div>
               )}

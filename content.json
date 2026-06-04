@@ -1,11 +1,11 @@
 {
-  "exportedAt": "2026-06-04T02:25:24.212Z",
+  "exportedAt": "2026-06-04T12:50:32.600Z",
   "notes": [
     "Put the resume PDF at public/resume.pdf.",
     "Put exported local project images under public/images/ and keep the filenames used here."
   ],
   "profile": {
-    "name": "",
+    "name": "余子涵",
     "title": "Digital Product Designer",
     "bio": "Hello！我是余子涵，一个来自华东理工大学的研二学生，工业设计专业背景。这是我的个人主页，存放着近期制作的AI项目，从设计到代码，它们全部由vibe coding完成。欢迎你体验使用，有任何建议或意见都请邮件给我～",
     "email": "1131676336@qq.com",
@@ -30,10 +30,10 @@
       "id": "p2",
       "title": "给我一杯咖啡的时间",
       "summary": "Café Pomodoro",
-      "details": "灵感来源于一次在咖啡馆自习，发现杯壁上留下一道道圈痕，思考的过程具像化了。这是一个计时器工具，正计时模式下，它会通过摄像头判断你的视线方向，来判断是否「专心」。一旦分神，咖啡液面会持续降低；当走神结束、重新专注的那一刻，当前液位被封存成一道圈痕。专注越久，圈痕越深；被打断越少，杯子越满。",
+      "details": "灵感来源于一次在咖啡馆自习，发现杯壁上留下一道道圈痕，思考的过程具像化了。这是一个计时器工具，正计时模式下，它会通过摄像头判断你的视线方向，来判断是否「专心」。一旦分神，咖啡液面会持续降低；当走神结束、重新专注的那一刻，当前液位被封存成一道圈痕。专注越久，圈痕越深越少；被打断越少，咖啡流失越少。",
       "imageUrl": "/images/coffee.png",
       "projectUrl": "https://caf-pomodoro.vercel.app/",
-      "story": "Lumina OS is less about reinventing the wheel and more about reconsidering the axle. We noticed that modern operating systems felt inherently flat, a relic of early 2D constraints. By introducing a Z-axis governed by true depth-of-field blur, Lumina maps cognitive hierarchy onto visual hierarchy.\n\nBehind the scenes, we developed a custom compositor from the ground up that uses advanced raymarching techniques to simulate glass occlusion. It pushes the boundaries of spatial computing while maintaining backward compatibility with legacy 2D applications.",
+      "story": "某次在咖啡馆自习时，我注意到杯壁留下的咖啡圈痕，由此萌生了这个项目的灵感；而促使我动手的，是想尝试一个用到摄像头识别的应用。\n——\n作为正式vibe coding的第一个应用，一开始经历了对工作流的摸索。虽然有设计背景，但我不想手搓figma，这种方式要求你有非常明确的设计目标/蓝图，且非常耗时，尤其是交互动效，我的想象力是有限的，因此我的答案未必是最好的答案。\n\n我不想AI只充当代码实现的工具，我希望我和它协作，做的是全流程的工作。所以从概念到设计再到代码，每一步都是我们商量着讨论着确定的。我最后的工作流：codex/cc讨论概念——>Gemini 3.1 pro模型制作前端设计——>返回到codex/cc加工代码/填充功能。\n\n——\n\n开发过程中，我面临过以下问题：\n\n## 1. 前端太丑\n\n前端美观度是个很微妙的点，看起来不重要（能跑通不就行了？），实际上很重要（像不像一个正经产品），而且其实并不好实现。\n既然不亲自设计，就得找别的办法。我能想到这几条路径：\n\n1）找现成的设计 skill：依从性好，但真正好用的很难找，通用性太强，做不出个性化的东西。\n\n2）自己写设计 skill：没试过，但同样费时；对我这种\"快速验证想法、尽早上线\"的首要目标来说不划算。\n\n3）先生成界面图、再让 AI 复刻：或许可行，还没试。\n\n4）直接拿参考网站让 AI 复刻：效果很差。\n\n5）换模型（我最后采用的、也是最省事的办法）：改用 Gemini 3.1 pro。它的设计能力应该被认真强化过，只靠简单提示词就能做出\"贴合意图 + 美观 + 克制\"的交互——克制尤其难得。\n\n![界面方案对比](/images/四个模型咖啡界面对比图.png)\n给我印象最深刻的一点，杯子的角度是立体+透视角度+咖啡圈痕是在杯壁上，这个意图只有Gemini 3.1 pro理解得最好，gpt5.5最差。\n\n## 2. 如何定义「思考」\n\n我的产品概念是通过咖啡液面的变化+圈痕来体现「专注/分心」「思考」，所以要找一个能用来量化的指标。\n\n在现实中，点了一杯咖啡，长久地没有喝完，也就是液面高度的停留，可以某种程度上体现你是否专注；而喝咖啡可以看作是短暂休息，意味着「分心」；而隔很久才啜饮一口咖啡，就会发现咖啡杯壁上残留的因为液面长时间停留在某个位置产生的圈痕，相隔时间越久，圈痕越深，所以圈痕的数量可以看作是「分心」的数量，圈痕的「深度」可以看作是两次分心之间「专注」的时长。\n\n这一步利用实际交互来表现/指代「专注」和「分心」这两个抽象的概念。\n![如何量化思考](/images/如何量化思考.png)\n\n## 3. 用什么指标判定「专注」/「分心」\n\n首先，我定义我的产品的使用情景是作为第二屏，不是操作主体，就像咖啡，只是静静地陪伴在用户身边，这是前提。\n\n在现实中，「专注」通常是埋头工作，「分心」是抬头。所以大概可以用头部和眼神的动作来界定「专注」还是「分心」。在这个过程中，CC和我为了弄清楚到底由什么指标决定，做了一个副产品——注意力探针。通过它，我们可以不断测试出最大决定权重的指标。\n\n![界面方案对比](/images/注意力探针.png)\n在这个过程中也经历了多次迭代过程（我发现通过迭代技术，可以反过来约束产品定义，比如「易进专注，难进分心」的设计就是在调试过程中想到的）：\n![注意力迭代流程](/images/注意力判断迭代过程.png)\n最终参数：worldDown（目光朝下量）= gaze + 0.03 × pitch 的合成值。它由两部分相加：\n![注意力参数确定](/images/参数.png)\n但由于光线/姿势/人的不同，我们很难用一个固定的标准来界定某用户的行为，所以我们在正式计时之前加入了两个校正环节，分别收集用户「专注」和「分心」的数据，再确定个性化的标准。\n\n——\n最后总结一下开发过程中的改动：\n![咖啡杯项目问题汇总列表](/images/咖啡问题汇总.png)\n",
       "imageFileName": "coffee.png"
     },
     {
