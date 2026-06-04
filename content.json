@@ -1,0 +1,68 @@
+{
+  "exportedAt": "2026-06-04T02:25:24.212Z",
+  "notes": [
+    "Put the resume PDF at public/resume.pdf.",
+    "Put exported local project images under public/images/ and keep the filenames used here."
+  ],
+  "profile": {
+    "name": "",
+    "title": "Digital Product Designer",
+    "bio": "Hello！我是余子涵，一个来自华东理工大学的研二学生，工业设计专业背景。这是我的个人主页，存放着近期制作的AI项目，从设计到代码，它们全部由vibe coding完成。欢迎你体验使用，有任何建议或意见都请邮件给我～",
+    "email": "1131676336@qq.com",
+    "phone": "15862466591",
+    "avatarUrl": "/images/Snipaste_2026-06-04_09-49-09.png",
+    "resumeUrl": "/resume.pdf",
+    "avatarFileName": "Snipaste_2026-06-04_09-49-09.png",
+    "resumeFileName": "余子涵-27届华东理工-产品实习生简历.pdf"
+  },
+  "projects": [
+    {
+      "id": "p1",
+      "title": "天气心情电影院",
+      "summary": "Weather-Mood-Cinema",
+      "details": "因为我想看看接API都有什么流程，又因为我是个喜欢看电影的人，因此诞生了这个项目。它支持你在地图上任意选点，展示这个地方的天气和温度，再搭配上此刻你的心情，就会根据我独特的算法和数据库推荐出一部最适合你的电影。\n像是在世界的某个坐标上，替当下的天气、心情和你，找到一部刚好抵达的电影。",
+      "imageUrl": "/images/cinema 2.png",
+      "projectUrl": "https://weather-mood-cinema-jz50bi7tc-duo7788s-projects.vercel.app/",
+      "story": "\n**第一阶段：起因与愿景**\n\n在现代数字化办公中，我们经常会被各种各样的消息、通知、弹窗所淹没。Aura Workspace 的诞生就是为了对抗这种“信息过载”。我们的初衷是打造一个数字避难所——它不仅是一个效率工具，更是一个能让人安静下来、深度思考的空间。为了实现这一点，我们做出了一个大胆的决定：不仅是重新设计用户界面，而是从更为基础的渲染层级着手。我们放弃了传统的基于 DOM 的网页构建方式，转而全面采用 WebGL。\n\n之所以这么做，是因为传统的 DOM 在处理复杂的空间关系和微小的物理反馈时会产生无法避免的重绘和延迟，而这些微小的延迟足以打断用户的“心流”。我们的开发团队耗时整整三个月，在 WebGL 之上自行封装了一套全新的渲染管线。这套管线允许我们以极高的帧率（持续稳定在 120 FPS），渲染出像水滴一样具有张力的流体动画和完全物理仿真的玻璃材质效果。每当用户在这个空间中滑动列表或者创建一个新的任务时，不会感到生硬的代码切变，而是仿佛在触碰真实的数字织物。这背后的技术挑战巨大，但当我们第一次看到光影在 3D 界面上丝滑流转时，所有人都觉得这是值得的。\n\n![研发阶段的概念草图](https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1200&auto=format&fit=crop)\n\n**第二阶段：困难与突破**\n\n毫无疑问，这个过程充满了难以想象的阻碍。将 Web 项目完全 3D 化，意味着我们必须自己实现字体的渲染（SDF 字体解析系统）、输入框的事件响应机制以及所有可访问性（Accessibility）的兜底方案。有那么几个周末，团队因为一个光照计算公式导致内存泄漏的问题一直熬到了凌晨。为了让光影看起来柔和、自然，我们请教了神经科学和计算摄影方向的专家，反复调节界面中高光点（Specular）的过渡曲线。在长达数十次的推倒重来之后，我们终于找到了属于 Aura 独有的一种漫反射光效。它让人感觉温暖、包容，而不是刺眼和科技感过载。\n\n此时团队面临的另一个重大挑战是“本地优先”（Local-first）架构的实现。为了让用户在没有网络的情况下依然能够做到秒级启动并且丝滑操作，我们引入了基于 CRDT（无冲突复制数据类型）的底层数据同步逻辑。它意味着，用户的每一笔工作数据，都在他自己的设备上拥有最高优先级，只有在网络条件极佳的情况下才会以加密的形态与云端进行增量同步。这个决定使得客户端的开发难度呈现指数级上升，但也正是得益于此，Aura Workspace 做到了真正的“零延迟”体验。所有的输入和反馈都发生在本地内存中，速度快得令人上瘾。\n\n这种极限优化理念贯穿了整个开发周期。每一个渲染批次、每一次内存分配都被严格监控。我们甚至为特定设备开发了独立的着色器（Shaders）优化分支，以期在功耗和发热之间达成完美的平衡。这种对极致性能的追求不仅是为了跑分，而是因为我们相信：慢，是杀死优雅逻辑的罪魁祸首；而快，是一切沉浸感的前提。\n\n![设计与开发过程的讨论记录](https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop)\n\n**第三阶段：设计哲学**\n\n在设计的过程中，我们一直秉持着“克制”的哲学。克制代表着不添加功能堆砌，代表着去除多余的界面元素。我们在全局调色板上使用了低饱和度的色系，这种颜色在长时间注视下也不会导致视神经疲劳。为了让空间感更为真实，我们根据层级关系巧妙地计算了景深模糊（Depth of Field Blurs），让即时的主要任务永远处于绝对清晰的状态，而将背景和其他干扰信息退隐到柔和的光影深处。这种设计其实是对人类初级视觉皮层的一种“迎合”，它自然地引导注意力，而不需要用户付出额外的意志力去抗拒分心。\n\n随着 Beta 版的发布，我们收到了大量核心用户的反馈。有趣的是，许多用户告诉我们，当他们打开 Aura 的时候，甚至什么都不做，仅仅是看着界面中极其缓慢的背景流沙动画，都会感到一种莫名的安宁。这给了我们极大的震撼与鼓励。软件不再仅仅是实现某种功能的冰冷工具，它可以像是一件趁手的乐器，或者一间布置得当的书房——它能够滋养使用者的精神状态。为了进一步强化这种空间氛围，我们邀请了环境音效设计师，为应用程序的核心动作录制了极具禅意的白噪音和物理碰撞拟音。\n\n**第四阶段：对未来的展望与反思**\n\n我们坚信，未来的计算体验应该是“不可见”（Invisible）的。用户不需要去理解文件层级、去辨别菜单栏里几百个按钮的作用。计算机应该主动地、默默地适应人类的认知模式。下一步，我们将尝试接入更多环境感知的 AI 模块。但与目前市面上那些“强存在感”的对话机器人不同，我们希望 AI 在 Aura 中的存在像空气一样：它可能会在你卡壳的时候顺着文脉帮你补全一个单词，可能会在你整理长篇报告时自动提取出隐藏的关键词结构，但它绝不会主动跳出来打断你的思路。\n\n回忆起这整个过程，每一张填满推演公式的白板、每一行经历过无数次重构的代码，以及无数个伴随着键盘敲击声度过的寂静长夜，都深刻印在这款产品的骨架之中。很多人曾质疑我们，在现有成熟框架面前去手写底层渲染是否是在“重复造轮子”，是否偏离了商业的敏捷原则。然而，如果没有这种偏执的追求，就绝不可能诞生出如此独特且极具先锋性的体验。对于我们这支只有五个人的团队来说，Aura 已经不仅是一个项目代码库，它更像是我们自身价值观在数字世界的投影。\n\n总而言之，这段为期一年的开发之旅，与其说是一次商业产品的打磨，不如说是几位狂热的理想主义者对当今浮躁的软件工业进行的一次小型“反叛”。我们并不期待 Aura 能成为主宰世界的效率帝国，我们只希望，在这个越来越嘈杂的数字时代里，它能够始终为那一小群向往宁静与专注的思考者，保留一张干净的“书桌”。这就是这背后完整的故事。也许它充满了很多技术上的执拗，充满了很多看似“不必要”的打磨，但正是这些不妥协，构成了 Aura 真正的灵魂。\n",
+      "imageFileName": "cinema 2.png"
+    },
+    {
+      "id": "p2",
+      "title": "给我一杯咖啡的时间",
+      "summary": "Café Pomodoro",
+      "details": "灵感来源于一次在咖啡馆自习，发现杯壁上留下一道道圈痕，思考的过程具像化了。这是一个计时器工具，正计时模式下，它会通过摄像头判断你的视线方向，来判断是否「专心」。一旦分神，咖啡液面会持续降低；当走神结束、重新专注的那一刻，当前液位被封存成一道圈痕。专注越久，圈痕越深；被打断越少，杯子越满。",
+      "imageUrl": "/images/coffee.png",
+      "projectUrl": "https://caf-pomodoro.vercel.app/",
+      "story": "Lumina OS is less about reinventing the wheel and more about reconsidering the axle. We noticed that modern operating systems felt inherently flat, a relic of early 2D constraints. By introducing a Z-axis governed by true depth-of-field blur, Lumina maps cognitive hierarchy onto visual hierarchy.\n\nBehind the scenes, we developed a custom compositor from the ground up that uses advanced raymarching techniques to simulate glass occlusion. It pushes the boundaries of spatial computing while maintaining backward compatibility with legacy 2D applications.",
+      "imageFileName": "coffee.png"
+    },
+    {
+      "id": "p3",
+      "title": "国风毛笔书画模拟器",
+      "summary": "Traditional Chinese Brush and Ink Painting Simulator",
+      "details": "墨影丹青是一款面向书画爱好者与传统文化学习者的国风毛笔书画模拟器，融合毛笔笔触、宣纸洇染、诗词描红、米字格辅助与定制印章等功能。用户可以自由选择笔法、纸张和墨色，在画布上书写、临摹或创作，并将作品保存为图片或PDF。无论是练习书法、体验水墨质感，还是制作带有东方韵味的作品，都能在这里获得沉浸而雅致的创作体验。",
+      "imageUrl": "/images/maobizi.png",
+      "projectUrl": "maobizi.vercel.app",
+      "story": "Time is experienced subjectively, yet our tools plot it objectively. Chronos rectifies this. It visualizes the week not as a rigid tabular grid, but as a dynamic fluid, expanding during high-flow states and contracting during mundane routines.\n\nDeveloping the procedural D3.js simulations required a delicate balance between computational accuracy and visual poetry. We utilized custom shaders to represent focus states as illuminated particulate energy, creating a tool that feels more like an organic entity than a digital alarm clock.",
+      "imageFileName": "maobizi.png"
+    },
+    {
+      "id": "p4",
+      "title": "吴侬有声",
+      "summary": "Wunong Voices",
+      "details": "吴侬有声是一款面向苏州话学习者的方言学习工具。项目以真实语音材料为核心，将视频、音档和日常录音整理成可反复聆听、跟读和复习的句子卡片，帮助用户在具体语境中理解苏州话的发音、表达和语气。它既是学习工具，也是一套轻量的苏州话语音资料整理系统。",
+      "imageUrl": "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=1200&auto=format&fit=crop",
+      "projectUrl": "开发中，敬请期待",
+      "story": "Web3 spaces often suffer from sterile, overwhelmingly technical aesthetics. For the Nexus project, we aimed to bridge the gap between cryptographic utility and humanistic warmth. The identity system relies on generative geometry that unique to each user's wallet address, meaning the brand itself is decentralized.\n\nWe implemented the motion guidelines using raw CSS and GSAP, ensuring that the identity translated perfectly from immersive landing pages down to 16px favicons."
+    },
+    {
+      "id": "p1780539220898",
+      "title": "新手村牌局",
+      "summary": "Card Quest ",
+      "details": "一款面向新手的棋牌学习工具。它把规则藏进真实的牌局场景里，像玩游戏一样边打边学：轮到你时，它会提示能出什么、为什么这么出，还能悔牌重来。手把手陪练，让\"不会打牌\"的人，在一局局实战中自然学会斗地主、麻将等常见棋牌。\n像我一样常常忘记棋牌规则的人的福音。",
+      "imageUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200",
+      "projectUrl": "开发中，敬请期待",
+      "story": "Story content here"
+    }
+  ]
+}
