@@ -67,10 +67,15 @@ export default function ProjectCard({
       initial={false}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => {
+        if (!isEditing && !isExpanded && project.story) {
+          onExpand?.();
+        }
+      }}
       animate={{
         minHeight: isExpanded ? "auto" : showCardDetails ? "34rem" : "22rem",
       }}
-      className={`relative w-full overflow-hidden group bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/5 ${isExpanded ? "rounded-[2rem] cursor-default" : "rounded-3xl"}`}
+      className={`relative w-full overflow-hidden group bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/5 ${isExpanded ? "rounded-[2rem] cursor-default" : project.story && !isEditing ? "rounded-3xl cursor-pointer" : "rounded-3xl"}`}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       {isExpanded && !isEditing && (
@@ -208,11 +213,7 @@ export default function ProjectCard({
             height: showCardDetails ? "auto" : 0,
             marginTop: showCardDetails ? 24 : 0,
           }}
-          className={`overflow-hidden ${
-            showCardDetails
-              ? "pointer-events-auto"
-              : "pointer-events-none"
-          }`}
+          className="overflow-hidden pointer-events-auto"
           transition={{
             height: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
             marginTop: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
@@ -255,7 +256,7 @@ export default function ProjectCard({
                   }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  VIST 查看项目 <ArrowUpRight className="w-4 h-4 ml-1" />
+                  VISIT 查看项目 <ArrowUpRight className="w-4 h-4 ml-1" />
                 </a>
               ) : (
                 <span className="inline-flex cursor-default items-center rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white/70 backdrop-blur-md">
