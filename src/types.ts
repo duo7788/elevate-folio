@@ -7,6 +7,7 @@ export interface Project {
   imageFileName?: string;
   projectUrl: string;
   story?: string;
+  storyDisabled?: boolean;
 }
 
 export interface Profile {

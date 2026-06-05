@@ -16,7 +16,7 @@ import { loadAvatarImage, saveAvatarImage } from './avatarStorage';
 import { ADMIN_PASSWORD } from './config';
 
 const ADMIN_SESSION_KEY = 'portfolio_admin_unlocked';
-const CONTENT_VERSION = '8';
+const CONTENT_VERSION = '9';
 
 function getExportedResumeUrl(profile: Profile) {
   if (profile.resumeUrl.startsWith('blob:')) return '/resume.pdf';

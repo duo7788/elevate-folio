@@ -28,6 +28,7 @@ export default function ProjectCard({
   const [imageUploadError, setImageUploadError] = useState("");
   const showCardDetails = isExpanded || isEditing || isHovered;
   const projectHref = getProjectHref(project.projectUrl);
+  const canReadStory = Boolean(project.story) && !project.storyDisabled;
 
   const handleChange = (field: keyof Project, value: string) => {
     if (onUpdate) onUpdate({ ...project, [field]: value });
@@ -68,14 +69,14 @@ export default function ProjectCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => {
-        if (!isEditing && !isExpanded && project.story) {
+        if (!isEditing && !isExpanded && canReadStory) {
           onExpand?.();
         }
       }}
       animate={{
         minHeight: isExpanded ? "auto" : showCardDetails ? "34rem" : "22rem",
       }}
-      className={`relative w-full overflow-hidden group bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/5 ${isExpanded ? "rounded-[2rem] cursor-default" : project.story && !isEditing ? "rounded-3xl cursor-pointer" : "rounded-3xl"}`}
+      className={`relative w-full overflow-hidden group bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/5 ${isExpanded ? "rounded-[2rem] cursor-default" : canReadStory && !isEditing ? "rounded-3xl cursor-pointer" : "rounded-3xl"}`}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       {isExpanded && !isEditing && (
@@ -265,15 +266,22 @@ export default function ProjectCard({
               )
             )}
 
-            {!isEditing && (
-              project.story &&
-              !isExpanded && (
+            {!isEditing && project.story && !isExpanded && (
+              canReadStory ? (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     onExpand && onExpand();
                   }}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-black/10 bg-white/10 text-neutral-800 backdrop-blur-sm transition-all duration-300 text-sm font-semibold uppercase tracking-wider hover:border-black/45 hover:bg-white/20 hover:text-black dark:border-white/20 dark:bg-white/5 dark:text-neutral-300 dark:hover:border-white/60 dark:hover:bg-white/10 dark:hover:text-white"
+                >
+                  <BookOpen className="w-4 h-4 mr-1" /> READ STORY 开发故事
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-black/10 bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-neutral-500 opacity-60 backdrop-blur-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-500"
                 >
                   <BookOpen className="w-4 h-4 mr-1" /> READ STORY 开发故事
                 </button>
