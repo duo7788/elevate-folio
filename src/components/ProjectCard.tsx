@@ -63,7 +63,7 @@ export default function ProjectCard({
 
   return (
     <motion.div
-      layoutId={`project-${project.id}`}
+      layoutId={isExpanded ? undefined : `project-${project.id}`}
       initial={false}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -103,7 +103,13 @@ export default function ProjectCard({
       )}
 
       {/* Background Image Container */}
-      <div className="absolute inset-0 w-full h-full">
+      <div
+        className={
+          isExpanded
+            ? "absolute top-0 left-0 right-0 h-[34rem] md:h-[38rem] w-full pointer-events-none"
+            : "absolute inset-0 w-full h-full"
+        }
+      >
         {isEditing ? (
           <div className="absolute bottom-6 left-6 right-6 z-30 flex justify-start pointer-events-none">
             <div
@@ -142,11 +148,19 @@ export default function ProjectCard({
         <img
           src={project.imageUrl}
           alt={project.title}
-          className="w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-105 dark:group-hover:brightness-110"
+          className={`w-full h-full object-cover transition-all duration-1000 ease-out ${
+            isExpanded
+              ? "brightness-95 dark:brightness-90"
+              : "group-hover:scale-105 dark:group-hover:brightness-110"
+          }`}
         />
         {/* Dark gradient mapping top content visibility */}
         <div
-          className={`absolute inset-0 bg-gradient-to-b from-white via-white/55 to-white/20 dark:from-black dark:via-black/40 dark:to-black/15 z-0 transition-opacity duration-1000 ${isExpanded ? "opacity-[0.67] dark:opacity-[0.56]" : "opacity-[0.63] group-hover:opacity-[0.28] dark:group-hover:opacity-[0.14]"}`}
+          className={`absolute inset-0 bg-gradient-to-b z-0 transition-opacity duration-1000 ${
+            isExpanded
+              ? "from-white/70 via-white/80 to-neutral-100 dark:from-black/50 dark:via-black/65 dark:to-neutral-900 opacity-100"
+              : "from-white via-white/55 to-white/20 dark:from-black dark:via-black/40 dark:to-black/15 opacity-[0.63] group-hover:opacity-[0.28] dark:group-hover:opacity-[0.14]"
+          }`}
         />
         <div
           className={`absolute inset-0 bg-white/40 dark:bg-black/40 z-0 transition-colors duration-500 ${isExpanded ? "bg-transparent" : "group-hover:bg-transparent"}`}
@@ -164,10 +178,10 @@ export default function ProjectCard({
               type="text"
               value={project.title}
               onChange={(e) => handleChange("title", e.target.value)}
-              className="w-full text-3xl lg:text-4xl font-display font-medium text-neutral-900 dark:text-white mb-3 tracking-tight bg-white/20 dark:bg-black/20 px-2 rounded outline-none"
+              className="w-full text-2xl lg:text-3xl font-display font-medium text-neutral-900 dark:text-white mb-3 tracking-tight bg-white/20 dark:bg-black/20 px-2 rounded outline-none"
             />
           ) : (
-            <h3 className="text-3xl lg:text-4xl font-display font-medium text-neutral-900 dark:text-white mb-4 tracking-tight">
+            <h3 className="text-2xl lg:text-3xl font-display font-medium text-neutral-900 dark:text-white mb-4 tracking-tight">
               {project.title}
             </h3>
           )}
@@ -241,7 +255,7 @@ export default function ProjectCard({
                   }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  Visit Project <ArrowUpRight className="w-4 h-4 ml-1" />
+                  VIST 查看项目 <ArrowUpRight className="w-4 h-4 ml-1" />
                 </a>
               ) : (
                 <span className="inline-flex cursor-default items-center rounded-full border border-white/10 bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white/70 backdrop-blur-md">
@@ -258,9 +272,9 @@ export default function ProjectCard({
                     e.stopPropagation();
                     onExpand && onExpand();
                   }}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-transparent rounded-full text-neutral-800 dark:text-neutral-300 text-sm font-semibold uppercase tracking-wider hover:text-black dark:hover:text-white transition-all duration-300 border border-transparent hover:border-black/10 dark:hover:border-white/10"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-black/10 bg-white/10 text-neutral-800 backdrop-blur-sm transition-all duration-300 text-sm font-semibold uppercase tracking-wider hover:border-black/45 hover:bg-white/20 hover:text-black dark:border-white/20 dark:bg-white/5 dark:text-neutral-300 dark:hover:border-white/60 dark:hover:bg-white/10 dark:hover:text-white"
                 >
-                  <BookOpen className="w-4 h-4 mr-1" /> Read Story
+                  <BookOpen className="w-4 h-4 mr-1" /> READ STORY 开发故事
                 </button>
               )
             )}

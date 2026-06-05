@@ -56,9 +56,11 @@ export default function App() {
     }
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [isProjectExpanded, setIsProjectExpanded] = useState(false);
   const resumeObjectUrlRef = useRef<string | null>(null);
   const avatarObjectUrlRef = useRef<string | null>(null);
   const projectImageObjectUrlsRef = useRef<Record<string, string>>({});
+  const firstScreenScrollLockRef = useRef(false);
   
   const [profile, setProfile] = useState<Profile>(() => {
     try {
@@ -110,6 +112,46 @@ export default function App() {
       Object.values(projectImageObjectUrlsRef.current).forEach((url) => {
         URL.revokeObjectURL(url);
       });
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.deltaY <= 0 ||
+        firstScreenScrollLockRef.current
+      ) {
+        return;
+      }
+
+      const portfolio = document.getElementById('portfolio');
+      if (!portfolio) return;
+
+      const portfolioTop = portfolio.getBoundingClientRect().top;
+      const isStillInHero = window.scrollY < window.innerHeight * 0.6;
+
+      if (isStillInHero && portfolioTop > window.innerHeight * 0.35) {
+        event.preventDefault();
+        firstScreenScrollLockRef.current = true;
+
+        window.setTimeout(() => {
+          window.scrollTo({
+            top: portfolio.offsetTop,
+            behavior: 'smooth',
+          });
+
+          window.setTimeout(() => {
+            firstScreenScrollLockRef.current = false;
+          }, 650);
+        }, 140);
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
     };
   }, []);
 
@@ -340,6 +382,7 @@ export default function App() {
         <Hero
           profile={profile}
           isEditing={isEditing}
+          hideScrollHint={isProjectExpanded}
           onProfileChange={setProfile}
           onAvatarUpload={handleAvatarUpload}
           onResumeUpload={handleResumeUpload}
@@ -349,6 +392,7 @@ export default function App() {
           isEditing={isEditing}
           onProjectsChange={setProjects}
           onProjectImageUpload={handleProjectImageUpload}
+          onExpandedChange={setIsProjectExpanded}
         />
       </div>
     </main>

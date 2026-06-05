@@ -8,12 +8,14 @@ import { AVATAR_IMAGE_MAX_BYTES, isAvatarImage } from '../avatarStorage';
 export default function Hero({ 
   profile, 
   isEditing, 
+  hideScrollHint,
   onProfileChange,
   onAvatarUpload,
   onResumeUpload,
 }: { 
   profile: Profile; 
   isEditing?: boolean;
+  hideScrollHint?: boolean;
   onProfileChange?: (p: Profile) => void;
   onAvatarUpload?: (file: File) => Promise<void> | void;
   onResumeUpload?: (file: File) => Promise<void> | void;
@@ -82,12 +84,12 @@ export default function Hero({
   };
 
   return (
-    <section className="relative w-full max-w-[100rem] mx-auto px-6 md:px-10 pt-32 pb-24 md:pt-48 md:pb-32">
+    <section className="relative flex min-h-screen w-full max-w-[100rem] mx-auto px-6 md:px-10 pt-32 pb-36 md:pt-40 md:pb-40">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col md:flex-row gap-12 lg:gap-24 items-start"
+        className="flex w-full flex-col md:flex-row gap-12 lg:gap-24 items-center"
       >
         <div className="flex-1 w-full max-w-full overflow-hidden">
           {isEditing ? (
@@ -225,7 +227,7 @@ export default function Hero({
                 className="flex items-center gap-2 px-6 justify-center text-white dark:text-black text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors shrink-0 h-full cursor-pointer"
               >
                 <Download className="w-4 h-4" /> 
-                Résumé
+                Résumé 求职简历
               </a>
             </motion.div>
           )}
@@ -233,15 +235,32 @@ export default function Hero({
         </div>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-4 left-6 md:left-6 text-neutral-500 dark:text-neutral-600 flex items-center gap-2"
-      >
-         <ArrowDown className="w-4 h-4 animate-bounce" />
-         <span className="text-xs uppercase tracking-widest font-medium">Scroll to explore</span>
-      </motion.div>
+      {!hideScrollHint && (
+        <motion.a
+          href="#portfolio"
+          onClick={(e) => {
+            e.preventDefault();
+            const portfolio = document.getElementById("portfolio");
+            if (!portfolio) return;
+
+            window.scrollTo({
+              top: portfolio.offsetTop,
+              behavior: "smooth",
+            });
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3 text-neutral-700 transition-colors hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white"
+        >
+           <ArrowDown className="w-5 h-5 animate-bounce" />
+           <span className="flex flex-col text-sm uppercase tracking-widest font-semibold leading-relaxed sm:flex-row sm:items-center sm:gap-2">
+             <span>Scroll to explore</span>
+             <span className="hidden sm:inline">/</span>
+             <span className="text-[0.78rem] text-neutral-600 dark:text-neutral-400">下滑查看项目列表</span>
+           </span>
+        </motion.a>
+      )}
     </section>
   );
 }
